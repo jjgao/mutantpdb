@@ -1,8 +1,6 @@
-package mmtf.workshop.mutantpdb.mmtf.workshop.mutantpdb.mmtf.workshop.mutantpdb.sandbox;
+package mmtf.workshop.mutantpdb.sandbox;
 
-import mmtf.workshop.mutantpdb.mmtf.workshop.mutantpdb.io.DataLocationProvider;
-import mmtf.workshop.mutantpdb.mmtf.workshop.mutantpdb.io.DataProvider;
-import mmtf.workshop.mutantpdb.mmtf.workshop.mutantpdb.utils.SaprkUtils;
+import mmtf.workshop.mutantpdb.io.DataProvider;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 

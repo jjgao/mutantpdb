@@ -1,6 +1,6 @@
-package mmtf.workshop.mutantpdb.mmtf.workshop.mutantpdb.io;
+package mmtf.workshop.mutantpdb.io;
 
-import mmtf.workshop.mutantpdb.mmtf.workshop.mutantpdb.utils.SaprkUtils;
+import mmtf.workshop.mutantpdb.utils.SaprkUtils;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 

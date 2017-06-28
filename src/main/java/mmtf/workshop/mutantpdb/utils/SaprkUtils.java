@@ -1,4 +1,4 @@
-package mmtf.workshop.mutantpdb.mmtf.workshop.mutantpdb.utils;
+package mmtf.workshop.mutantpdb.utils;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
