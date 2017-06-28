@@ -66,20 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
                    name: "polymer"
                });
                o.addRepresentation("cartoon", { color: "tomato" });
-               o.addRepresentation("ball+stick", {
-                   name: "ligand",
-                   visible: ligandCheckbox.checked,
-                   sele: "not ( polymer or water or ion )"
                });
-               o.addRepresentation("spacefill", {
-                   name: "waterIon",
-                   visible: waterIonCheckbox.checked,
-                   sele: "water or ion",
-                   scale: 0.25
-               });
-           });
+           };
 
-       }
+
 
        var struct2;
 
@@ -93,19 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
                    name: "polymer"
                });
                o.addRepresentation("cartoon", { color: "yellow" });
-               o.addRepresentation("ball+stick", {
-                   name: "ligand",
-                   visible: ligandCheckbox.checked,
-                   sele: "not ( polymer or water or ion )"
                });
-               o.addRepresentation("spacefill", {
-                   name: "waterIon",
-                   visible: waterIonCheckbox.checked,
-                   sele: "water or ion",
-                   scale: 0.25
-               });
-           });
-       }
+           };
+
 
        var loadStructureButton = createFileButton("load structure", {
            accept: ".pdb,.cif,.ent,.gz",
@@ -207,9 +187,8 @@ document.addEventListener("DOMContentLoaded", function () {
                if (e.keyCode === 13) {
                    e.preventDefault();
 
-                   var sele = ":" + chainStruct1 + " and " + value;
-                   struct1.addRepresentation("cartoon", {sele: sele, color: "green"});
-
+                   var sele =  value + ":" + chainStruct1;
+                   struct1.addRepresentation("spacefill", {sele: sele, color: "green"});
                    console.log(sele);
 
                } else {
@@ -238,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
                if (e.keyCode === 13) {
                    e.preventDefault();
 
-                   var sele = ":" + value;
+                   var sele = value;
                    chainStruct2 = sele;
                  // struct2.addRepresentation("cartoon", {sele: sele, color: "pink"});
 
@@ -266,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function () {
                if (e.keyCode === 13) {
                    e.preventDefault();
 
-                   var sele = ":" + chainStruct2 + " and " + value;
+                   var sele =  value + ":" + chainStruct2;
                    struct2.addRepresentation("cartoon", {sele: sele, color: "green"});
 
                } else {
