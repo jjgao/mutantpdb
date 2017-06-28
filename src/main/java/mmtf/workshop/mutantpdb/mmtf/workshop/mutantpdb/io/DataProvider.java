@@ -21,7 +21,7 @@ public class DataProvider {
                 .option("delimiter", "\t")
                 .option("header", "true")
                 .load(getOncoKBFile())
-                .select("Gene", "Ref", "Position", "Varaint");
+                .select("Gene", "Uniprot", "Ref", "Position", "Varaint");
         return df;
     }
 
