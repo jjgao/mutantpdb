@@ -25,6 +25,18 @@ public class DataProvider {
         return df;
     }
 
+    public Dataset<Row> getHumanGenomeMapping() {
+        Dataset<Row>  df = SaprkUtils.getSparkSession().read()
+                .parquet(DataLocationProvider.getHumanGenomeMappingLocation());
+        return df;
+    }
+
+    public Dataset<Row> getUniprotToPdbMapping() {
+        Dataset<Row>  df = SaprkUtils.getSparkSession().read()
+                .parquet(DataLocationProvider.getUniprotToPdbMappingLocation());
+        return df;
+    }
+
     public static void main(String[] args) {
 
         DataProvider provider = new DataProvider();

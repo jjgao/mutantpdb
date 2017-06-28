@@ -15,7 +15,10 @@ public class App
         DataProvider provider = new DataProvider();
         Dataset<Row> mutations = provider.getOncoKBMutations();
 
+        Dataset<Row> uniprotToPdbMapping = provider.getUniprotToPdbMapping();
+        
         mutations.show();
+        uniprotToPdbMapping.show();
 
     }
 }
