@@ -16,6 +16,7 @@ public class App
     public static void main( String[] args )
     {
         DataProvider provider = new DataProvider();
+
         Dataset<Row> mutations = provider.getOncoKBMutations();
         // Uniprot to PDB mapping
         Dataset<Row> map = provider.getUniprotToPdbMapping();
@@ -28,7 +29,7 @@ public class App
 
         mutationsOnStructures.write()
                 .mode(SaveMode.Overwrite)
-                .parquet(DataLocationProvider.getMutationsMappingLocation());
+                .parquet(provider.getMutationsFileLocation());
 
     }
 }

@@ -9,9 +9,14 @@ import org.apache.spark.sql.Row;
  */
 public class DataProvider {
 
-    private String getOncoKBFile() {
+    public String getOncoKBFile() {
         ClassLoader classLoader = getClass().getClassLoader();
         return classLoader.getResource("oncokb_variants_missense.txt").getFile();
+    }
+
+    public String getMutationsFileLocation() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        return classLoader.getResource("mutations").getPath();
     }
 
     public Dataset<Row> getOncoKBMutations() {
@@ -37,10 +42,18 @@ public class DataProvider {
         return df;
     }
 
+    public Dataset<Row> getMutationsToStructures() {
+
+        DataProvider provider = new DataProvider();
+        Dataset<Row>  df = SaprkUtils.getSparkSession().read()
+                .parquet(provider.getMutationsFileLocation());
+        return df;
+    }
+
     public static void main(String[] args) {
 
         DataProvider provider = new DataProvider();
-        System.out.println(provider.getOncoKBFile());
+        System.out.println(provider.getMutationsFileLocation());
 
     }
 }
