@@ -20,8 +20,15 @@ public class DataProvider {
                 .format("com.databricks.spark.csv")
                 .option("delimiter", "\t")
                 .option("header", "true")
-                .load(getOncoKBFile());
+                .load(getOncoKBFile())
+                .select("Gene", "Ref", "Position", "Varaint");
         return df;
     }
 
+    public static void main(String[] args) {
+
+        DataProvider provider = new DataProvider();
+        System.out.println(provider.getOncoKBFile());
+
+    }
 }
