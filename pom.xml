@@ -15,6 +15,7 @@
     <slf4j.version>1.7.5</slf4j.version>
     <log4j.version>2.6.1</log4j.version>
     <spark.version>2.1.0</spark.version>
+    <mmtf-spark.version>0.0.1-SNAPSHOT</mmtf-spark.version>
   </properties>
 
   <dependencies>
@@ -87,6 +88,11 @@
       <version>${log4j.version}</version>
       <!-- runtime scope includes the test scope as well -->
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>edu.sdsc</groupId>
+      <artifactId>mmtf-spark</artifactId>
+      <version>${mmtf-spark.version}</version>
     </dependency>
     <!-- - - -  -->
 
