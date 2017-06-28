@@ -1,5 +1,6 @@
 package mmtf.workshop.mutantpdb;
 
+import mmtf.workshop.mutantpdb.io.DataLocationProvider;
 import mmtf.workshop.mutantpdb.io.DataProvider;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -27,7 +28,7 @@ public class App
 
         mutationsOnStructures.write()
                 .mode(SaveMode.Overwrite)
-                .parquet(provider.getMutationsFileLocation());
+                .parquet(DataLocationProvider.getMutationsFileLocation());
 
     }
 }
