@@ -16,8 +16,8 @@ public class ShowDataset {
         DataProvider provider = new DataProvider();
 
         Dataset<Row> df = provider.getMutationsToStructures();
-        df.show();
+        df.filter(col("pdbId").equalTo("1A1U")).show();
 
-        System.out.println(df.select(col("Uniprot")).distinct().count());
+
     }
 }

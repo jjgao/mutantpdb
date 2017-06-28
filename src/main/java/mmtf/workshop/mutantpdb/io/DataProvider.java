@@ -26,10 +26,11 @@ public class DataProvider {
         return df;
     }
 
-    public Dataset<Row> getMutationsToStructures() {
+    public static Dataset<Row> getMutationsToStructures() {
 
+        DataLocationProvider p = new DataLocationProvider();
         Dataset<Row>  df = SaprkUtils.getSparkSession().read()
-                .parquet(DataLocationProvider.getMutationsFileLocation());
+                .parquet(p.getMutationsFileLocation());
         return df;
     }
 
