@@ -21,14 +21,20 @@ public class FilterResidue implements PairFunction<Tuple2<String, Structure>, St
         String chainId = t._1.split(Pattern.quote("."))[1];
         int resNum = Integer.valueOf(t._1.split(Pattern.quote("."))[2]);
 
-        for ( Chain chain : t._2.getChains()) {
-            List<Group> groups = chain.getAtomGroups();
-            for (Group g : groups) {
-                if ( resNum == g.getResidueNumber().getSeqNum() ) {
-                    Character aa = StructureTools.get1LetterCodeAmino(g.getPDBName());
-                    return new Tuple2<String, String>(t._1+"."+aa.toString(), aa.toString());
+        try {
+            for ( Chain chain : t._2.getChains()) {
+                if ( !chain.getName().equals(chainId))
+                    continue;
+                List<Group> groups = chain.getAtomGroups();
+                for (Group g : groups) {
+                    if ( resNum == g.getResidueNumber().getSeqNum() ) {
+                        Character aa = StructureTools.get1LetterCodeAmino(g.getPDBName());
+                        return new Tuple2<String, String>(t._1+"."+aa.toString(), aa.toString());
+                    }
                 }
             }
+        } catch (Exception e) {
+            return new Tuple2<String, String>(t._1, null);
         }
         return new Tuple2<String, String>(t._1, null);
     }

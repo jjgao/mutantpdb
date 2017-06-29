@@ -18,7 +18,8 @@ public class SaprkUtils {
 		if (sContext==null) {
 			conf = new SparkConf()
 					.setMaster("local[" + cores + "]")
-					.setAppName("");
+					.setAppName("")
+					.set("spark.hadoop.validateOutputSpecs", "false");
 			sContext = new JavaSparkContext(conf);
 		}
 		return sContext;

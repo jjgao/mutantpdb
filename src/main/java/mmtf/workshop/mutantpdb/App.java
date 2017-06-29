@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.apache.spark.sql.functions.col;
+
 
 /**
  * Hello world!
@@ -34,6 +36,8 @@ public class App
     {
 
         Dataset<Row> mutations = DataProvider.getMutationsToStructures();
+        List<String> pdbIds = mutations.select(col("pdbId"))
+                .distinct().toJavaRDD().map(t -> t.getString(0)).collect();
 
         List<Row> broadcasted = mutations.select("pdbId", "chainId", "pdbAtomPos").collectAsList();
         SaprkUtils.stopSparkSession();
@@ -41,14 +45,15 @@ public class App
         JavaSparkContext sc = SaprkUtils.getSparkContext();
         Broadcast<List<Row>> bcmut = sc.broadcast(broadcasted);
 
-        MmtfReader
-                .downloadMmtfFiles(Arrays.asList("1A1U"), sc)
+        MmtfReader.readSequenceFile("/pdb/2017/full", pdbIds, sc)
+                //.downloadMmtfFiles(Arrays.asList("5IRC"), sc)
                 .flatMapToPair(new StructureToPolymerChains())
                 .flatMapToPair(new AddResidueToKey(bcmut))
                 .mapValues(new StructureToBioJava())
-                .mapToPair(new FilterResidue()).keys()
+                .mapToPair(new FilterResidue())
+                .filter(t -> t._2!=null).keys()
                 .map(t -> t.replace(".", ","))
-                .saveAsTextFile("/Users/yana/git/mutantpdb/src/main/resources/pdbResidues.csv");
+                .saveAsTextFile("/Users/yana/git/mutantpdb/src/main/resources/pdb_residues");
         sc.close();
     }
 }

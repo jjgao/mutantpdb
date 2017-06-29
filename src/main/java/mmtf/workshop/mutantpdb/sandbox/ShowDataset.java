@@ -15,8 +15,8 @@ public class ShowDataset {
 
         DataProvider provider = new DataProvider();
 
-        Dataset<Row> df = provider.getMutationsToStructures();
-        df.filter(col("pdbId").equalTo("1A1U")).show();
+        Dataset<Row> df = provider.getUniprotToPdbMapping();
+        df.filter(col("pdbId").equalTo("5IRC").and(col("chainId").equalTo("F"))).show();
 
 
     }
