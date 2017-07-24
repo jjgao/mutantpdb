@@ -17,7 +17,6 @@ public class FilterResidue implements PairFunction<Tuple2<String, Structure>, St
     @Override
     public Tuple2<String, String> call(Tuple2<String, Structure> t) throws Exception {
 
-        String pdbId = t._1.split(Pattern.quote("."))[0];
         String chainId = t._1.split(Pattern.quote("."))[1];
         int resNum = Integer.valueOf(t._1.split(Pattern.quote("."))[2]);
 
@@ -29,7 +28,7 @@ public class FilterResidue implements PairFunction<Tuple2<String, Structure>, St
                 for (Group g : groups) {
                     if ( resNum == g.getResidueNumber().getSeqNum() ) {
                         Character aa = StructureTools.get1LetterCodeAmino(g.getPDBName());
-                        return new Tuple2<String, String>(t._1+"."+aa.toString(), aa.toString());
+                        return new Tuple2<>(t._1+"."+aa.toString(), aa.toString());
                     }
                 }
             }

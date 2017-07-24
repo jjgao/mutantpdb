@@ -34,7 +34,6 @@ public class App
 {
     public static void main( String[] args )
     {
-
         Dataset<Row> mutations = DataProvider.getMutationsToStructures();
         List<String> pdbIds = mutations.select(col("pdbId"))
                 .distinct().toJavaRDD().map(t -> t.getString(0)).collect();
@@ -45,8 +44,8 @@ public class App
         JavaSparkContext sc = SaprkUtils.getSparkContext();
         Broadcast<List<Row>> bcmut = sc.broadcast(broadcasted);
 
-        MmtfReader.readSequenceFile("/pdb/2017/full", pdbIds, sc)
-                //.downloadMmtfFiles(Arrays.asList("5IRC"), sc)
+        MmtfReader//.readSequenceFile("/pdb/2017/full", pdbIds, sc)
+                .downloadMmtfFiles(Arrays.asList("5IRC"), sc)
                 .flatMapToPair(new StructureToPolymerChains())
                 .flatMapToPair(new AddResidueToKey(bcmut))
                 .mapValues(new StructureToBioJava())
